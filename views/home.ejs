@@ -5,17 +5,8 @@
     <p><%= ejsHomeStartingContent %></p>
 
     <%for (let i of ejsPosts){%>
-        <% console.log(i.title);%>
-        <% console.log(i.content);%>
-    <%}%>
-
-    <%for (let i of ejsPosts){%>
         <h1><%= i.title %></h1>
-        <% for(let j in i){ %>
-            
-                <p> <%=i[j]; %></p>
-            
-        <% } %>
+        <p><%= i.content %></p>
     <%}%>
 
 
