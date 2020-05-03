@@ -20,6 +20,8 @@ app.get("/", function(req, res){
     ejsHomeStartingContent: homeStartingContent,
     ejsPosts: posts
   });
+  
+
 });
 
 app.get("/about", function(req, res){
@@ -50,9 +52,16 @@ app.post("/compose", function(req, res){
   res.redirect("/");
 });
 
+app.get("/posts/:days", function(req, res){
 
+  const checkMatch = req.params.days;
 
-
+  for (let i of posts){
+    if (checkMatch === i.title){
+        console.log("Match found!");
+    }
+  }
+});
 
 app.listen(3000, function() {
   console.log("Server started on port 3000");
