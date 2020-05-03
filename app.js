@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
+const _ = require("lodash");
 
 const posts = [];
 
@@ -20,8 +21,6 @@ app.get("/", function(req, res){
     ejsHomeStartingContent: homeStartingContent,
     ejsPosts: posts
   });
-  
-
 });
 
 app.get("/about", function(req, res){
@@ -41,7 +40,7 @@ app.get("/compose", function(req, res){
 });
 
 app.post("/compose", function(req, res){
-  
+
   const post = {
     title: req.body.newEntryTitle,
     content: req.body.newEntryPost
@@ -52,13 +51,16 @@ app.post("/compose", function(req, res){
   res.redirect("/");
 });
 
-app.get("/posts/:days", function(req, res){
+app.get("/posts/:entries", function(req, res){
 
-  const checkMatch = req.params.days;
+  const checkMatch = req.params.entries;
 
   for (let i of posts){
-    if (checkMatch === i.title){
-        console.log("Match found!");
+    if (_.kebabCase(checkMatch) === _.kebabCase(i.title)){
+      res.render("post", {
+        ejsTitle: i.title,
+        ejsContent: i.content
+      });
     }
   }
 });
