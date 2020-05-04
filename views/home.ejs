@@ -5,13 +5,8 @@
     <p><%= ejsHomeStartingContent %></p>
 
     <%for (let i of ejsPosts){%>
-        <h1><%= i.title %></h1>
-        <p><%= i.content %></p>
+        <a href="/posts/<%= i.title %>"><h1><%= i.title %></h1></a>
+        <p><%= i.content.substring(0, 100) + "..." %></p>
     <%}%>
-
-
-
-
-
 
 <%- include("partials/footer"); -%>
